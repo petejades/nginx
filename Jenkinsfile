@@ -20,9 +20,12 @@ stage(‘Build’) {
 	}
         stage (‘deploy’) {
 	steps {
-		sh "cd nginx && docker run -d -p 80:80 nginx:latest "
+		sh "cd nginx && docker stop webserver || true && docker rm webserver || true && docker run -d -p 80:80 --name webserver nginx:latest"
 
 	}
 	}
 }
 }
+
+
+
